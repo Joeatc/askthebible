@@ -10,6 +10,7 @@
     "@types/node": "^16.18.76",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
+    "aios": "^1.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -39,5 +40,22 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "axios": "^1.6.7",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+  },
+  "proxy": "https://lukas-walther.de",
+  "homepage": "https://www.lukas-walther.de/AskTheBible",
+  "description": "This project was created with respect and honor to the people who made the repository and the api.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joeatc/askthebible.git"
+  },
+  "author": "Joachim Walther",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Joeatc/askthebible/issues"
   }
 }
