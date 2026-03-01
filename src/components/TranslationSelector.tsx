@@ -14,7 +14,7 @@ const CURATED_TRANSLATIONS = [
 
 interface Props {
   selected: string;
-  onSelect: (abbreviation: string) => void;
+  onSelect: (abbreviation: string, lang: string) => void;
 }
 
 export default function TranslationSelector({ selected, onSelect }: Props) {
@@ -39,7 +39,11 @@ export default function TranslationSelector({ selected, onSelect }: Props) {
         <select
           className="form-control"
           value={selected}
-          onChange={e => onSelect(e.target.value)}
+          onChange={e => {
+            const abbr = e.target.value;
+            const lang = translations[abbr]?.lang ?? 'de';
+            onSelect(abbr, lang);
+          }}
         >
           <option value="">— Select a translation —</option>
           {available.map(abbr => (

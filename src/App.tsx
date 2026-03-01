@@ -7,9 +7,11 @@ import ChapterVerseSelector from './components/ChapterVerseSelector';
 import VerseDisplay from './components/VerseDisplay';
 import PresentationMode from './components/PresentationMode';
 import BackgroundUploader, { STORAGE_KEY } from './components/BackgroundUploader';
+import HamburgerMenu from './components/HamburgerMenu';
 
 function App() {
   const [translation, setTranslation] = useState('schlachter');
+  const [lang, setLang] = useState('de');
   const [translationName, setTranslationName] = useState('');
   const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [selectedVerse, setSelectedVerse] = useState<Verse | null>(null);
@@ -19,8 +21,9 @@ function App() {
     () => localStorage.getItem(STORAGE_KEY)
   );
 
-  const handleTranslationChange = (abbr: string) => {
+  const handleTranslationChange = (abbr: string, language: string) => {
     setTranslation(abbr);
+    setLang(language);
     setSelectedBook(null);
     setSelectedVerse(null);
     setCurrentChapter(null);
@@ -47,8 +50,9 @@ function App() {
   return (
     <div className="app-container">
       <div className="header">
-        <img src="logo512.png" alt="a golden cross" className="header-image" />
+        <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="a golden cross" className="header-image" />
         <h1 className="title">Ask the Bible</h1>
+        <HamburgerMenu lang={lang} />
       </div>
 
       <TranslationSelector selected={translation} onSelect={handleTranslationChange} />
