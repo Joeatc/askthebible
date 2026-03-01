@@ -1,79 +1,365 @@
 /* App.css */
 
+/* ---- Layout ---- */
+
 .app-container {
-  text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
   background-color: #f8f8f8;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
+  max-width: 900px;
   margin: 40px auto;
 }
 
 .header {
   position: relative;
   text-align: center;
-}
-
-.header-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50px; /* Adjust as necessary */
-  height: auto; /* Maintain aspect ratio */
-}
-
-.header {
   background-color: #fff;
   margin-bottom: 20px;
   padding: 20px;
   border-radius: 8px;
 }
 
+.header-image {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 50px;
+  height: auto;
+}
+
 .title {
   color: #4a4a4a;
+  margin: 0;
+}
+
+/* ---- Shared controls ---- */
+
+.selector-section {
+  margin-bottom: 20px;
+}
+
+.selector-label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.loading-text {
+  color: #888;
+  font-style: italic;
 }
 
 .form-control {
   padding: 10px;
-  margin: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 16px;
-  width: 80%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.button {
-  background-color: #4CAF50;
+/* ---- Book grid ---- */
+
+.testament-heading {
+  font-size: 14px;
+  color: #777;
+  margin: 12px 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.book-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.book-button {
+  padding: 6px 10px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.book-button:hover {
+  background: #e8f5e9;
+  border-color: #4CAF50;
+}
+
+.book-button.selected {
+  background: #4CAF50;
+  color: #fff;
+  border-color: #4CAF50;
+}
+
+/* ---- Chapter & verse grids ---- */
+
+.chapter-grid,
+.verse-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.chapter-button,
+.verse-button {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.chapter-button:hover,
+.verse-button:hover {
+  background: #e8f5e9;
+  border-color: #4CAF50;
+}
+
+.chapter-button.selected,
+.verse-button.selected {
+  background: #4CAF50;
+  color: #fff;
+  border-color: #4CAF50;
+}
+
+.verse-hint {
+  font-weight: 400;
+  font-size: 13px;
+  color: #888;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* ---- Verse display panel ---- */
+
+.verse-display-panel {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.verse-reference {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.verse-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.present-button {
+  background-color: #1565C0;
   color: white;
-  padding: 10px 20px;
-  margin: 10px;
+  padding: 12px 32px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s ease;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
 }
 
-.button:hover {
-  background-color: #45a049;
+.present-button:hover {
+  background-color: #0D47A1;
 }
 
-.verse-display {
-  color: #555;
-  text-align: left;
-  background-color: #fff;
-  padding: 20px;
-  margin-top: 20px;
+/* ---- Background uploader ---- */
+
+.background-uploader {
+  margin-bottom: 20px;
+}
+
+.uploader-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.file-input {
+  font-size: 14px;
+}
+
+.remove-bg-button {
+  padding: 6px 14px;
+  font-size: 13px;
+  border: 1px solid #e57373;
+  border-radius: 4px;
+  background: #fff;
+  color: #c62828;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.remove-bg-button:hover {
+  background: #ffebee;
+}
+
+.bg-preview {
+  margin-top: 10px;
+}
+
+.bg-preview-img {
+  max-width: 200px;
+  max-height: 120px;
   border-radius: 4px;
   border: 1px solid #ddd;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  object-fit: cover;
 }
 
+/* ---- Presentation mode ---- */
+
+.presentation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.presentation-dimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.presentation-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 36px;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.presentation-close:hover {
+  color: #fff;
+}
+
+.presentation-content {
+  max-width: 80%;
+  text-align: center;
+  padding: 40px;
+}
+
+.presentation-verse-text {
+  font-size: 3.5vw;
+  line-height: 1.5;
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  margin-bottom: 30px;
+  font-weight: 400;
+}
+
+.presentation-reference {
+  font-size: 1.8vw;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+  font-style: italic;
+}
+
+.presentation-nav {
+  position: absolute;
+  bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.nav-button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: #fff;
+}
+
+.nav-button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.nav-indicator {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+}
+
+/* ---- Responsive ---- */
+
 @media (max-width: 600px) {
-  .form-control, .button {
-    width: 90%;
+  .app-container {
+    margin: 10px;
+    padding: 12px;
+  }
+
+  .book-button {
+    font-size: 11px;
+    padding: 4px 6px;
+  }
+
+  .chapter-button,
+  .verse-button {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+
+  .presentation-verse-text {
+    font-size: 6vw;
+  }
+
+  .presentation-reference {
+    font-size: 3.5vw;
   }
 }
