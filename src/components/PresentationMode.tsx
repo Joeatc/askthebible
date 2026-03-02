@@ -1,5 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import { Verse, Chapter } from '../types';
+import { getI18n } from '../i18n';
 
 interface Props {
   verse: Verse;
@@ -8,6 +9,7 @@ interface Props {
   backgroundImage: string | null;
   onExit: () => void;
   onNavigate: (verseNr: number) => void;
+  lang: string;
 }
 
 function cleanText(text: string): string {
@@ -21,8 +23,10 @@ export default function PresentationMode({
   backgroundImage,
   onExit,
   onNavigate,
+  lang,
 }: Props) {
   const currentIndex = chapter.verses.findIndex(v => v.verse === verse.verse);
+  const t = getI18n(lang);
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') {
@@ -50,7 +54,7 @@ export default function PresentationMode({
   return (
     <div className="presentation-overlay" style={bgStyle}>
       <div className="presentation-dimmer">
-        <button className="presentation-close" onClick={onExit} title="Exit (ESC)">✕</button>
+        <button className="presentation-close" onClick={onExit} title={t.exitEsc}>✕</button>
 
         <div className="presentation-content">
           <div className="presentation-verse-text">{cleanText(verse.text)}</div>

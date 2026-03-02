@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { BookData, Chapter, Verse } from '../types';
 import { fetchBook } from '../api';
+import { getI18n } from '../i18n';
 
 interface Props {
   abbreviation: string;
   bookNr: number;
   bookName: string;
   onVerseSelect: (verse: Verse, chapter: Chapter, translationName: string) => void;
+  lang: string;
 }
 
-export default function ChapterVerseSelector({ abbreviation, bookNr, bookName, onVerseSelect }: Props) {
+export default function ChapterVerseSelector({ abbreviation, bookNr, bookName, onVerseSelect, lang }: Props) {
   const [bookData, setBookData] = useState<BookData | null>(null);
   const [loading, setLoading] = useState(false);
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
   const [selectedVerse, setSelectedVerse] = useState<number | null>(null);
+  const t = getI18n(lang);
 
   useEffect(() => {
     setLoading(true);
@@ -25,7 +28,7 @@ export default function ChapterVerseSelector({ abbreviation, bookNr, bookName, o
       .finally(() => setLoading(false));
   }, [abbreviation, bookNr]);
 
-  if (loading) return <p className="loading-text">Loading {bookName}...</p>;
+  if (loading) return <p className="loading-text">{bookName} {t.loadingBook}</p>;
   if (!bookData) return null;
 
   const chapters = bookData.chapters;
@@ -45,7 +48,7 @@ export default function ChapterVerseSelector({ abbreviation, bookNr, bookName, o
 
   return (
     <div className="selector-section">
-      <label className="selector-label">Chapter</label>
+      <label className="selector-label">{t.chapter}</label>
       <div className="chapter-grid">
         {chapters.map(ch => (
           <button
@@ -61,7 +64,7 @@ export default function ChapterVerseSelector({ abbreviation, bookNr, bookName, o
       {currentChapter && (
         <>
           <label className="selector-label">
-            Verse <span className="verse-hint">(1–{currentChapter.verses.length} available)</span>
+            {t.verse} <span className="verse-hint">(1–{currentChapter.verses.length} {t.verseAvailable})</span>
           </label>
           <div className="verse-grid">
             {currentChapter.verses.map(v => (

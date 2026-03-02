@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import './App.css';
 import { Verse, Chapter, Book } from './types';
+import { getI18n } from './i18n';
 import TranslationSelector from './components/TranslationSelector';
 import BookSelector from './components/BookSelector';
 import ChapterVerseSelector from './components/ChapterVerseSelector';
@@ -47,21 +48,24 @@ function App() {
     if (verse) setSelectedVerse(verse);
   }, [currentChapter]);
 
+  const t = getI18n(lang);
+
   return (
     <div className="app-container">
       <div className="header">
         <img src={`${process.env.PUBLIC_URL}/logo192.png`} alt="a golden cross" className="header-image" />
-        <h1 className="title">Ask the Bible</h1>
+        <h1 className="title">{t.appTitle}</h1>
         <HamburgerMenu lang={lang} />
       </div>
 
-      <TranslationSelector selected={translation} onSelect={handleTranslationChange} />
+      <TranslationSelector selected={translation} onSelect={handleTranslationChange} lang={lang} />
 
       {translation && (
         <BookSelector
           abbreviation={translation}
           selectedNr={selectedBook?.nr ?? null}
           onSelect={handleBookSelect}
+          lang={lang}
         />
       )}
 
@@ -71,6 +75,7 @@ function App() {
           bookNr={selectedBook.nr}
           bookName={selectedBook.name}
           onVerseSelect={handleVerseSelect}
+          lang={lang}
         />
       )}
 
@@ -78,11 +83,13 @@ function App() {
         verse={selectedVerse}
         translationName={translationName}
         onPresent={() => setPresenting(true)}
+        lang={lang}
       />
 
       <BackgroundUploader
         backgroundImage={backgroundImage}
         onChange={setBackgroundImage}
+        lang={lang}
       />
 
       {presenting && selectedVerse && currentChapter && (
@@ -93,6 +100,7 @@ function App() {
           backgroundImage={backgroundImage}
           onExit={() => setPresenting(false)}
           onNavigate={handleNavigate}
+          lang={lang}
         />
       )}
     </div>

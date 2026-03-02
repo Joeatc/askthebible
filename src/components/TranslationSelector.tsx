@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Translation } from '../types';
 import { fetchTranslations } from '../api';
+import { getI18n } from '../i18n';
 
 const CURATED_TRANSLATIONS = [
   'schlachter',
@@ -15,11 +16,13 @@ const CURATED_TRANSLATIONS = [
 interface Props {
   selected: string;
   onSelect: (abbreviation: string, lang: string) => void;
+  lang: string;
 }
 
-export default function TranslationSelector({ selected, onSelect }: Props) {
+export default function TranslationSelector({ selected, onSelect, lang }: Props) {
   const [translations, setTranslations] = useState<Record<string, Translation>>({});
   const [loading, setLoading] = useState(true);
+  const t = getI18n(lang);
 
   useEffect(() => {
     fetchTranslations()
@@ -32,9 +35,9 @@ export default function TranslationSelector({ selected, onSelect }: Props) {
 
   return (
     <div className="selector-section">
-      <label className="selector-label">Translation</label>
+      <label className="selector-label">{t.translation}</label>
       {loading ? (
-        <p className="loading-text">Loading translations...</p>
+        <p className="loading-text">{t.loadingTranslations}</p>
       ) : (
         <select
           className="form-control"
@@ -45,7 +48,7 @@ export default function TranslationSelector({ selected, onSelect }: Props) {
             onSelect(abbr, lang);
           }}
         >
-          <option value="">— Select a translation —</option>
+          <option value="">{t.selectTranslation}</option>
           {available.map(abbr => (
             <option key={abbr} value={abbr}>
               {translations[abbr].translation} ({translations[abbr].language})

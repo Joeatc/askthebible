@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Book } from '../types';
 import { fetchBooks } from '../api';
+import { getI18n } from '../i18n';
 
 interface Props {
   abbreviation: string;
   selectedNr: number | null;
   onSelect: (book: Book) => void;
+  lang: string;
 }
 
-export default function BookSelector({ abbreviation, selectedNr, onSelect }: Props) {
+export default function BookSelector({ abbreviation, selectedNr, onSelect, lang }: Props) {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(false);
+  const t = getI18n(lang);
 
   useEffect(() => {
     if (!abbreviation) return;
@@ -21,7 +24,7 @@ export default function BookSelector({ abbreviation, selectedNr, onSelect }: Pro
       .finally(() => setLoading(false));
   }, [abbreviation]);
 
-  if (loading) return <p className="loading-text">Loading books...</p>;
+  if (loading) return <p className="loading-text">{t.loadingBooks}</p>;
   if (books.length === 0) return null;
 
   const ot = books.filter(b => b.nr <= 39);
@@ -29,9 +32,9 @@ export default function BookSelector({ abbreviation, selectedNr, onSelect }: Pro
 
   return (
     <div className="selector-section">
-      <label className="selector-label">Book</label>
+      <label className="selector-label">{t.book}</label>
 
-      <h3 className="testament-heading">Old Testament</h3>
+      <h3 className="testament-heading">{t.oldTestament}</h3>
       <div className="book-grid">
         {ot.map(book => (
           <button
@@ -44,7 +47,7 @@ export default function BookSelector({ abbreviation, selectedNr, onSelect }: Pro
         ))}
       </div>
 
-      <h3 className="testament-heading">New Testament</h3>
+      <h3 className="testament-heading">{t.newTestament}</h3>
       <div className="book-grid">
         {nt.map(book => (
           <button
