@@ -19,6 +19,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -42,11 +44,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "axios": "^1.6.7",
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "gh-pages": "^6.3.0"
   },
-  "proxy": "https://lukas-walther.de",
-  "homepage": "https://www.lukas-walther.de/AskTheBible",
+  "homepage": "https://askthebible.app",
   "description": "This project was created with respect and honor to the people who made the repository and the api.",
   "main": "index.js",
   "repository": {

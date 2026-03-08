@@ -10,6 +10,7 @@ const strings = {
     help: 'Hilfe: waltherj(at)web.de',
     donation: 'Spenden',
     poweredBy: 'Bereitgestellt von getBible.net',
+    copyright: '© 2026 Joachim Walther · Open Source (ISC)',
     modalTitle: 'Dieses Projekt unterstützen',
     modalText: 'Ihre Spenden helfen, diese App am Laufen zu halten. Die Beiträge werden aufgeteilt zwischen:',
     apiBenefit: 'für den Betrieb und die Wartung der API-Server, die die Bibeltexte bereitstellen.',
@@ -22,6 +23,7 @@ const strings = {
     help: 'Help: waltherj(at)web.de',
     donation: 'Donate',
     poweredBy: 'Powered by getBible.net',
+    copyright: '© 2026 Joachim Walther · Open Source (ISC)',
     modalTitle: 'Support this project',
     modalText: 'Your donations help keep this app running. Contributions are split between:',
     apiBenefit: 'for running and maintaining the API servers that provide Bible text data.',
@@ -96,6 +98,14 @@ function HamburgerMenu({ lang }: Props) {
               rel="noopener noreferrer"
             >
               {t.poweredBy}
+            </a>
+            <a
+              className="menu-item menu-item-static"
+              href="https://github.com/Joeatc/askthebible"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t.copyright}
             </a>
           </div>
         )}
